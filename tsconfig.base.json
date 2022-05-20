@@ -1,0 +1,76 @@
+{
+  "compilerOptions": {
+    "outDir": "build/dist",
+    "module": "esnext",
+    "target": "es6",
+    "lib": [
+      "es6",
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "sourceMap": true,
+    "allowJs": true,
+    "jsx": "preserve",
+    "baseUrl": "./",
+    "rootDirs": [
+      "src",
+      "node_modules"
+    ],
+    "paths": {
+      "src/*": [
+        "src/*"
+      ],
+      "@redux": [
+        "../node_modules/redux"
+      ],
+      "@images": [
+        "./assets/images"
+      ],
+      "@pages": [
+        "./pages"
+      ],
+      "@ui": [
+        "./src/ui"
+      ],
+      "@api": [
+        "./src/api"
+      ],
+      "@models": [
+        "./src/models"
+      ],
+      "assets/images/*": [
+        "assets/images/*",
+      ]
+    },
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "isolatedModules": true,
+    // "noEmit": true
+  },
+  "include": [
+    "src",
+    "faker",
+    "typings",
+    "typings/.react-load-scriptd.ts",
+    "server",
+    "typings"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "webpack",
+    "jest",
+    "server"
+  ]
+}

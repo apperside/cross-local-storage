@@ -1,0 +1,25 @@
+{
+  "workbench.colorCustomizations": {
+    "editorIndentGuide.activeBackground": "#20e20e9e"
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.classpath": true,
+    "**/.factorypath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/temp": true,
+    "**/node_modules": false
+  },
+  "workspace.isHidden": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
