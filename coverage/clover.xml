@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1653918294368" clover="3.2.0">
-  <project timestamp="1653918294368" name="All files">
+<coverage generated="1653919642444" clover="3.2.0">
+  <project timestamp="1653919642444" name="All files">
     <metrics statements="109" coveredstatements="108" conditionals="80" coveredconditionals="78" methods="35" coveredmethods="35" elements="224" coveredelements="221" complexity="0" loc="109" ncloc="109" packages="1" files="1" classes="1"/>
     <file name="crossLocalStorage.ts" path="/Users/simone/dev/react/cross-local-storage/src/crossLocalStorage.ts">
       <metrics statements="109" coveredstatements="108" conditionals="80" coveredconditionals="78" methods="35" coveredmethods="35"/>
@@ -110,7 +110,7 @@
       <line num="190" count="2" type="stmt"/>
       <line num="191" count="1" type="stmt"/>
       <line num="192" count="2" type="cond" truecount="2" falsecount="0"/>
-      <line num="196" count="18" type="stmt"/>
+      <line num="196" count="16" type="stmt"/>
       <line num="199" count="2" type="stmt"/>
       <line num="202" count="1" type="stmt"/>
     </file>
