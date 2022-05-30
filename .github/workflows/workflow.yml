@@ -16,10 +16,19 @@ jobs:
       - run: npm run build --if-present
       - name: Generate coverage report
         run: npm run test:coverage
+      - name: Create Awesome Badge
+        uses: schneegans/dynamic-badges-action@v1.4.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 0f430fc46fb51c17c23d7bf5d12fa812
+          filename: test.json
+          label: Hello
+          message: World
+          color: orange
       - name: Upload to codecov
         uses: codecov/codecov-action@v2
         with:
-          files: ./coverage/coverage-summary.json
+          files: ./coverage/coverage-summary.json 
           flags: unittests # optional
           name: codecov-umbrella # optional
           fail_ci_if_error: true # optional (default = false)
