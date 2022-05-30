@@ -1,4 +1,5 @@
 
+
   
   
   
@@ -55,7 +56,7 @@
 
   
 
-<img src="images/logo.png" alt="Logo" width="80" height="80">
+<img width="349" alt="Screenshot_2022-05-20_at_13 12 27-removebg-preview" src="https://user-images.githubusercontent.com/5955338/169516334-06b4fff8-a178-41ab-9d31-4921b5638d05.png">
 
   
 
@@ -72,12 +73,9 @@
   
 
 <p align="center">
+A small, typescript first, well tested, cross platform wrapper around react-native-async-storage/async-storage which works out of the on both the browser and react native
 
 Bootstrapped with https://www.npmjs.com/package/react-component-lib-boilerplate
-
-  
-
-An opinionated wrapper to allow using localstorage api both on web and react native
 
   
 
@@ -276,15 +274,8 @@ This is an example of how to list things you need to use the software and how to
   
 
 ```sh
-
-  
-
 npm i apperside/cross-local-storage
-
-  
-
 ```
-
   
 
 * yarn
@@ -292,15 +283,10 @@ npm i apperside/cross-local-storage
   
 
 ```sh
-
-  
-
 yarn add apperside/cross-local-storage
-
-  
-
 ```
-
+##### REACT NATIVE USERS
+If you use this library on the web, you are good to go. If you are running on react-native instead, you need to install '@react-native-community/async-storage', here you can find the [full docs](https://react-native-async-storage.github.io/async-storage/docs)
   
   
 
@@ -353,38 +339,40 @@ export interface ILocalStorage {
 
   
 
-`LocalStorageKeys` is simply an empty interface which you can augment to provide the allowed keys for read and write operations (since types are not augmentable, the only way to provide extendable types are interfaces).  You can find more about typescript augmentation in [the dedicated documentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation).
+`LocalStorageKeys` is a type alias which represents the keys of the enum `LocalStorageKeysEnum` , which you can augment to provide the allowed keys for read and write operations (you can find more about typescript's declaration merging feature in [the dedicated documentation](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation)). 
 
-  This is an example of how you can extend the interface
+Here is how it is defined
+
+```typescript
+export enum LocalStorageKeysEnum {
+	// TO BE AUGMENTED
+}
+
+export type LocalStorageKeys = keyof  typeof LocalStorageKeysEnum;
+
+```
+
+  This is an example of how you can extend the enum
   <a name="key-declarations"/>
 
 ```typescript
 
 /**
-
 * You have to add this declaration wherever you want to augment librariy's types
-
 */
 
 declare  module  "cross-local-storage" {
-
 	/**
-
 	* Augment this interface to add al custom endpoints
-
 	*/
 
-	export  interface  LocalStorageKeys {
-		myLocalStorageKey:string
-		anotherLocalStorageKey:string
+	export enum LocalStorageKeysEnum {
+		myLocalStorageKey,
+		anotherLocalStorageKey
 	}
-
 }
 
 ```
-
-
-> **IMPORTANT** Since react-native's AsyncStorage api are async, you need an async approach on web too.
 
 
 After you augment the interface, you can use the library very easily
@@ -409,6 +397,8 @@ await crollLocalStorage.multiGet("myLocalStorageKey" , "my value");
 
 ```
 
+> **IMPORTANT** Since react-native's AsyncStorage api are async, you need an async approach on web too.
+> 
 ## FULL API
 
   
@@ -557,7 +547,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
   
 
-Your Name Apperside - https://apperside.com - info@apperside.com
+Apperside - https://apperside.com - info@apperside.com
 
   
 

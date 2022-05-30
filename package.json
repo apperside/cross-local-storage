@@ -1,7 +1,7 @@
 {
 	"name": "cross-local-storage",
 	"version": "0.0.1",
-	"description": "A wrapper around localStorage that allows interacing with local storage on both the browser and react native",
+	"description": "A small, typescript first, well tested, cross platform wrapper around react-native-async-storage/async-storage which works out of the on both the browser and react native",
 	"main": "lib/index.js",
 	"module": "lib/index.esm.js",
 	"scripts": {

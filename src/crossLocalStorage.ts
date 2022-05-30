@@ -7,94 +7,71 @@ try {
 } catch (err: any) {
 	console.warn('AsyncStorage not found');
 }
+console.log("localStorage is", localStorage)
 const _localStorage =
 	typeof localStorage !== 'undefined' ? localStorage : AsyncStorage;
 
 if (!_localStorage) {
+	//TODO: how to test this?
 	console.error("windows.localstorage and @react-native-community/async-storage are both undefined ");
 }
 
-export interface ILocalStorage {
-	setItem: (key: keyof LocalStorageKeys, data?: string | null) => void | Promise<any>;
-	getItem: (key: keyof LocalStorageKeys) => Promise<string | null>;
-	removeItem: (key: keyof LocalStorageKeys) => Promise<boolean>;
-	setBoolean: (
-		key: keyof LocalStorageKeys,
-		data?: boolean | null,
-	) => Promise<boolean | void>;
-	getBoolean: (key: keyof LocalStorageKeys) => Promise<boolean>;
-	setJson: (
-		key: keyof LocalStorageKeys,
-		data: any,
-	) => Promise<boolean | void>;
-	getJson: <T = any>(key: keyof LocalStorageKeys) => Promise<T | null>;
-	setNumber: (
-		key: keyof LocalStorageKeys,
-		data: number,
-	) => Promise<boolean | void>;
-	getNumber: (key: keyof LocalStorageKeys, defaultValue?: number | null) => Promise<number | null>;
-	multiSet: (data: LocalStorageKeyValuePair) => Promise<boolean>;
-	multiGet: (
-		...keys: (keyof LocalStorageKeys)[]
-	) => Promise<LocalStorageKeyValuePair>;
-	multiRemove: (...keys: (keyof LocalStorageKeys)[]) => Promise<boolean>;
-	clear: () => void;
-	enableLogging: (enabled: boolean) => void;
-}
 
-
-export interface LocalStorageKeys {
+export enum LocalStorageKeysEnum {
 	// to be augmented
 }
 
-type LocalStorageKeyValuePair = { [key in keyof Partial<LocalStorageKeys>]?: string | null };
+export type LocalStorageKeys = keyof typeof LocalStorageKeysEnum;
 
-let _logginEnabled = process.env.NODE_ENV == 'development' || process.env.NODE_ENV == 'dev';
+type LocalStorageKeyValuePair = { [key in LocalStorageKeys]?: string | null };
 
+let _logginEnabled = ["development", "dev", "test"].indexOf(process.env.NODE_ENV as any) >= 0
+console.log("process.env.NODE_ENV", process.env.NODE_ENV)
 
-export const crossLocalStorage: ILocalStorage = {
+export const crossLocalStorage = {
 
-	getItem: async (key: keyof LocalStorageKeys) => {
+	getItem: async (key: LocalStorageKeys) => {
 		const value = await _localStorage.getItem(key);
-		_logginEnabled && console.warn(`value for key ${key} is ${value}`);
+		_logginEnabled && console.log(`value for key ${key} is ${value}`);
 		return value;
 	},
-	setItem: async (key: keyof LocalStorageKeys, data?: string | null) => {
-		_logginEnabled && console.warn(`trying to insert ${data} for key ${key}`);
+
+	setItem: async (key: LocalStorageKeys, data?: string | null) => {
+		_logginEnabled && console.log(`trying to insert ${data} for key ${key}`);
 		if (data !== undefined && data != null) {
 			return await _localStorage.setItem(key, data);
 		}
 		return crossLocalStorage.removeItem(key);
 	},
-	// remove items is used from other function
-	removeItem: async (key: keyof LocalStorageKeys): Promise<boolean> => {
-		_logginEnabled && console.warn('removing key from local storage ' + key);
+
+	removeItem: async (key: LocalStorageKeys): Promise<boolean> => {
+		_logginEnabled && console.log('removing key from local storage ' + key);
 		try {
 			return await _localStorage.removeItem(key);
 		} catch (err) {
 			console.error(`error removing ${key} from local storage`, err);
-			return false
+			throw err;
 		}
 	},
 
-	setJson: async (key: keyof LocalStorageKeys, data: any) => {
-		_logginEnabled && console.warn(`trying to insert json for key ${key}`, data);
+	setJson: async (key: LocalStorageKeys, data: any) => {
+		_logginEnabled && console.log(`trying to insert json for key ${key}`, data);
 		if (data !== undefined && data != null) {
 			return await _localStorage.setItem(key, JSON.stringify(data));
 		}
 		return crossLocalStorage.removeItem(key);
 	},
-	getJson: async <T = any>(key: keyof LocalStorageKeys) => {
+	getJson: async <T = any>(key: LocalStorageKeys) => {
 		const value = await _localStorage.getItem(key);
-		_logginEnabled && console.warn(`boolean value for key ${key} is ${value}`);
+		_logginEnabled && console.log(`boolean value for key ${key} is ${value}`);
 		if (!!value) {
 			return JSON.parse(value) as any as T
 		}
 		return null;
 	},
 
-	setBoolean: async (key: keyof LocalStorageKeys, data?: boolean | null) => {
-		_logginEnabled && console.warn(`trying to insert boolean ${data} for key ${key}`);
+	setBoolean: async (key: LocalStorageKeys, data?: boolean | null) => {
+		_logginEnabled && console.log(`trying to insert boolean ${data} for key ${key}`);
 		let value = data;
 		if (value == undefined || value == null) {
 			value = false
@@ -114,26 +91,27 @@ export const crossLocalStorage: ILocalStorage = {
 		return await _localStorage.setItem(key, String(value));
 	},
 
-	getBoolean: async (key: keyof LocalStorageKeys) => {
+	getBoolean: async (key: LocalStorageKeys) => {
 		const value = await _localStorage.getItem(key);
-		_logginEnabled && console.warn(`boolean value for key ${key} is ${value}`);
+		_logginEnabled && console.log(`boolean value for key ${key} is ${value}`);
 		return value == 'true';
 	},
 
-	setNumber: async (key: keyof LocalStorageKeys, data: number) => {
-		_logginEnabled && console.warn(`trying to insert number ${data} for key ${key}`);
-		if (isNaN(data)) {
+	setNumber: async (key: LocalStorageKeys, data?: number) => {
+		_logginEnabled && console.log(`trying to insert number ${data} for key ${key}`);
+		if (data && isNaN(data)) {
 			throw new Error("value is not a number")
 		}
 		if (data !== undefined && data != null) {
 			return await _localStorage.setItem(key, String(data));
 		}
+		//@ts-ignore
 		return crossLocalStorage.removeItem(key as any);
 	},
 
-	getNumber: async (key: keyof LocalStorageKeys, defaultValue: number | null = null) => {
+	getNumber: async (key: LocalStorageKeys, defaultValue: number | null = null) => {
 		const value = await _localStorage.getItem(key)
-		_logginEnabled && console.warn(`number value for key ${key} is ${value}`);
+		_logginEnabled && console.log(`number value for key ${key} is ${value}`);
 		if (value === null) {
 			return defaultValue
 		}
@@ -156,6 +134,7 @@ export const crossLocalStorage: ILocalStorage = {
 					const key: any = (keyValue as any)[0] as any;
 					const value = (data as any)[key];
 					if (value === undefined || value === null) {
+						//@ts-ignore
 						await crossLocalStorage.removeItem(key);
 					}
 					else {
@@ -163,20 +142,25 @@ export const crossLocalStorage: ILocalStorage = {
 					}
 					resolve(true)
 				} catch (error) {
-					console.error(`error removing ${keyValue} from local storage`, error);
-					reject(false);
+					console.error(`error in multiset for key ${keyValue} `, error);
+					reject(error);
 				}
 
 			})
 		});
-		const result = await Promise.all(promises);
-		return result.reduce((acc, curr) => {
-			return acc && curr;
-		}, !!result[0])
+		try {
+			const result = await Promise.all(promises);
+			return result.reduce((acc, curr) => {
+				return acc && curr;
+			}, !!result[0])
+		} catch (err) {
+			console.error("********* error in multiset", err);
+			throw err;
+		}
 	},
 
 	multiGet: async (
-		...keys: (keyof LocalStorageKeys)[]
+		...keys: (LocalStorageKeys)[]
 	): Promise<LocalStorageKeyValuePair> => {
 		const promises = keys.map(key => {
 			return _localStorage.getItem(key);
@@ -189,8 +173,8 @@ export const crossLocalStorage: ILocalStorage = {
 		}, {})
 	},
 
-	multiRemove: async (...keys: (keyof LocalStorageKeys)[]): Promise<boolean> => {
-		_logginEnabled && console.warn('removing multiple keys from local storage ', keys);
+	multiRemove: async (...keys: (LocalStorageKeys)[]): Promise<boolean> => {
+		_logginEnabled && console.log('removing multiple keys from local storage ', keys);
 		const promises = keys.map(key => {
 			return new Promise<boolean>(async (resolve, reject) => {
 				try {
@@ -198,7 +182,7 @@ export const crossLocalStorage: ILocalStorage = {
 					resolve(true)
 				} catch (error) {
 					console.error(`error removing ${key} from local storage`, error);
-					reject(false);
+					reject(error);
 				}
 
 			})

@@ -1,21 +1,19 @@
 /* eslint-disable testing-library/no-node-access */
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import cls from "./localStorageHelper"
+import cls from "./crossLocalStorage";
 
-declare module "./localStorageHelper" {
+declare module "./crossLocalStorage" {
 	/**
   
 	  * Augment this interface to add al custom endpoints
   
 	  */
 
-	export interface LocalStorageKeys {
-		myLocalStorageKey: string;
-		anotherLocalStorageKey: string;
-		booleanKey: string;
-		numberKey: string;
-		jsonKey: string;
+	export enum LocalStorageKeysEnum {
+		"myLocalStorageKey",
+		"anotherLocalStorageKey",
+		"booleanKey",
+		"numberKey",
+		"jsonKey"
 	}
 }
 
@@ -165,6 +163,90 @@ describe("crossplatform local storage", () => {
 		await cls.setNumber("numberKey", 1);
 		numberValue = await cls.getNumber("numberKey");
 		expect(numberValue).toBe(1)
+
+		await expect(cls.setNumber("myLocalStorageKey", "aaa" as any))
+			.rejects.
+			toThrow('value is not a number');
+
+		await cls.setNumber("numberKey", undefined);
+		numberValue = await cls.getNumber("numberKey");
+		expect(numberValue).toBeNull()
+	});
+
+	test("logger", async () => {
+		const spy = jest.spyOn(console, "log");
+		cls.enableLogging(true);
+		await cls.setItem("myLocalStorageKey", "myvalue");
+		expect(spy).toHaveBeenCalledWith('trying to insert myvalue for key myLocalStorageKey')
+
+		spy.mockReset();
+		cls.enableLogging(false);
+		await cls.setItem("myLocalStorageKey", "myvalue");
+		expect(spy).not.toHaveBeenCalled();
+	});
+
+
+	test("exceptions", async () => {
+		const throwError = () => { throw new Error("custom error message") };
+		Storage.prototype.getItem = jest.fn(throwError);
+		Storage.prototype.setItem = jest.fn(throwError);
+		Storage.prototype.removeItem = jest.fn(throwError);
+		Storage.prototype.clear = jest.fn(throwError);
+
+		await expect(cls.getItem("myLocalStorageKey"))
+			.rejects
+			.toThrow('custom error message');
+
+
+		await expect(cls.setItem("myLocalStorageKey", "myvalue"))
+			.rejects.
+			toThrow('custom error message');
+
+		await expect(cls.removeItem("myLocalStorageKey"))
+			.rejects.
+			toThrow('custom error message');
+
+		await expect(cls.setJson("myLocalStorageKey", {}))
+			.rejects.
+			toThrow('custom error message');
+
+		await expect(cls.getJson("myLocalStorageKey"))
+			.rejects.
+			toThrow('custom error message');
+
+		await expect(cls.setBoolean("myLocalStorageKey", false))
+			.rejects.
+			toThrow('custom error message');
+
+		await expect(cls.getBoolean("myLocalStorageKey"))
+			.rejects.
+			toThrow('custom error message');
+
+		await expect(cls.setNumber("myLocalStorageKey", 1))
+			.rejects.
+			toThrow('custom error message');
+
+		await expect(cls.getNumber("myLocalStorageKey"))
+			.rejects.
+			toThrow('custom error message');
+
+		await expect(cls.multiSet({ myLocalStorageKey: "value1", anotherLocalStorageKey: "value2" }))
+			.rejects.
+			toThrow('custom error message');
+
+		await expect(cls.multiGet("myLocalStorageKey"))
+			.rejects.
+			toThrow('custom error message');
+
+		await expect(cls.multiRemove("myLocalStorageKey"))
+			.rejects.
+			toThrow('custom error message');
+
+		await expect(cls.clear())
+			.rejects.
+			toThrow('custom error message');
+
+
 	});
 });
 

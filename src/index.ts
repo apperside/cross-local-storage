@@ -1,5 +1,5 @@
 
 
-export * from "./localStorageHelper";
-import crossLocalStorage from "./localStorageHelper";
+export * from "./crossLocalStorage";
+import crossLocalStorage from "./crossLocalStorage";
 export default crossLocalStorage;
