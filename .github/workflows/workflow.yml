@@ -50,13 +50,13 @@ jobs:
           # process.env.BRANCH = 'pull_27';
           echo "BRANCH=$(echo ${BRANCH_NAME})"
           echo "BRANCH=$(echo ${BRANCH_NAME})" >> $GITHUB_ENV
-      # - name: Upload to codecov
-      #   uses: codecov/codecov-action@v2
-      #   with:
-      #     files: ./coverage/coverage-summary.json 
-      #     flags: unittests # optional
-      #     name: codecov-umbrella # optional
-      #     fail_ci_if_error: true # optional (default = false)
-      #     verbose: true # optional (default = false)
+      - name: Upload to codecov
+        uses: codecov/codecov-action@v2
+        with:
+          files: ./coverage/cobertura-coverage.xml 
+          flags: unittests # optional
+          name: codecov-umbrella # optional
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
 
 

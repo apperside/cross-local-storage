@@ -13,6 +13,13 @@ module.exports = {
       "identity-obj-proxy",
   },
   setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
-  coverageReporters: ["json", "json-summary", "text", "lcov", "text-summary"],
+  coverageReporters: [
+    "json",
+    "json-summary",
+    "text",
+    "lcov",
+    "text-summary",
+    "cobertura",
+  ],
 };
 
