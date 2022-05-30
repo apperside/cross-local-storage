@@ -6898,7 +6898,7 @@ fsevents@^1.2.7:
     bindings "^1.5.0"
     nan "^2.12.1"
 
-fsevents@^2.1.2, fsevents@~2.3.1:
+fsevents@^2.1.2, fsevents@~2.3.1, fsevents@~2.3.2:
   version "2.3.2"
   resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
   integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
@@ -11416,12 +11416,12 @@ rollup-plugin-typescript2@^0.31.1:
     resolve "1.20.0"
     tslib "2.2.0"
 
-rollup@^2.48.0:
-  version "2.48.0"
-  resolved "https://registry.npmjs.org/rollup/-/rollup-2.48.0.tgz"
-  integrity sha512-wl9ZSSSsi5579oscSDYSzGn092tCS076YB+TQrzsGuSfYyJeep8eEWj0eaRjuC5McuMNmcnR8icBqiE/FWNB1A==
+rollup@^2.75.3:
+  version "2.75.3"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.75.3.tgz#11bd3e8ace526911feea8af17f2a286fbfdb4cf8"
+  integrity sha512-YA29fLU6MAYSaDxIQYrGGOcbXlDmG96h0krGGYObroezcQ0KgEPM3+7MtKD/qeuUbFuAJXvKZee5dA1dpwq1PQ==
   optionalDependencies:
-    fsevents "~2.3.1"
+    fsevents "~2.3.2"
 
 rsvp@^4.8.4:
   version "4.8.5"

@@ -73,7 +73,7 @@
 		"prettier": "^2.3.0",
 		"prop-types": "^15.7.2",
 		"react-redux": "^7.2.6",
-		"rollup": "^2.48.0",
+		"rollup": "^2.75.3",
 		"rollup-plugin-cleaner": "^1.0.0",
 		"rollup-plugin-copy": "^3.4.0",
 		"rollup-plugin-executable": "^1.6.3",
