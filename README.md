@@ -13,7 +13,7 @@
   
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/apperside/cross-local-storage/master)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/apperside/cross-local-storage/Node.js%20CI)
-![Codecov](https://img.shields.io/codecov/c/github/apperside/cross-local-storage)
+[![codecov](https://codecov.io/gh/apperside/cross-local-storage/branch/master/graph/badge.svg?token=KMP3WCEP04)](https://codecov.io/gh/apperside/cross-local-storage)
   
 
 [![Stargazers][stars-shield]][stars-url]
