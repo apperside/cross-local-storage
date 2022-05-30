@@ -17,7 +17,7 @@ jobs:
       - name: Generate coverage report
       - run: npm run test:coverage
       - name: Upload to codecov
-      - uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v2
         with:
           files: ./coverage/clover.xml
           flags: unittests # optional
