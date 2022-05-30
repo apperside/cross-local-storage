@@ -5,7 +5,7 @@
 	"main": "lib/index.js",
 	"module": "lib/index.esm.js",
 	"scripts": {
-		"test": "jest ./src",
+		"test": "jest ./src --coverage",
 		"test:coverage": "jest ./src --coverage",
 		"test:badges": "npm run test:coverage  && jest-coverage-badges",
 		"test:watch": "echo todo: add test script",
