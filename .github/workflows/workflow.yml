@@ -19,7 +19,7 @@ jobs:
       - name: Upload to codecov
         uses: codecov/codecov-action@v2
         with:
-          files: ./coverage/clover.xml
+          files: ./coverage/coverage-summary.json
           flags: unittests # optional
           name: codecov-umbrella # optional
           fail_ci_if_error: true # optional (default = false)
