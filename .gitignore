@@ -5,3 +5,4 @@ storybook-static
 build-storybook.log
 *.sh
 update.sh
+coverage
