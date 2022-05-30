@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="109" lines-covered="108" line-rate="0.9908" branches-valid="80" branches-covered="78" branch-rate="0.975" timestamp="1653924610011" complexity="0" version="0.1">
+<coverage lines-valid="109" lines-covered="108" line-rate="0.9908" branches-valid="80" branches-covered="78" branch-rate="0.975" timestamp="1653924766939" complexity="0" version="0.1">
   <sources>
     <source>/Users/simone/dev/react/cross-local-storage</source>
   </sources>

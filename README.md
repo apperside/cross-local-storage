@@ -11,19 +11,12 @@
 <div id="top"></div>
 
   
-
-  
-
-[![Contributors][contributors-shield]][contributors-url]
-
-  
-
-[![Forks][forks-shield]][forks-url]
-
+![GitHub branch checks state](https://img.shields.io/github/checks-status/apperside/cross-local-storage/master)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/apperside/cross-local-storage/Node.js%20CI)
+![Codecov](https://img.shields.io/codecov/c/github/apperside/cross-local-storage)
   
 
 [![Stargazers][stars-shield]][stars-url]
-
   
 
 [![Issues][issues-shield]][issues-url]
@@ -73,7 +66,7 @@
   
 
 <p align="center">
-A small, typescript first, well tested, cross platform wrapper around react-native-async-storage/async-storage which works out of the on both the browser and react native
+A small, typescript first, well tested, cross platform wrapper around react-native-async-storage/async-storage which works out of the box on both the browser and react native
 
 Bootstrapped with https://www.npmjs.com/package/react-component-lib-boilerplate
 
