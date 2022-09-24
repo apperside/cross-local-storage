@@ -8,7 +8,7 @@ try {
   console.warn("native AsyncStorage not found");
 }
 
-console.log("localStorage is", localStorage);
+console.log("localStorage is", typeof localStorage);
 const _localStorage =
   typeof localStorage !== "undefined" ? localStorage : AsyncStorage;
 
